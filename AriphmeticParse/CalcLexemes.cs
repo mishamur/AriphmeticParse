@@ -26,11 +26,15 @@ namespace AriphmeticParse
             this.lexemes = lexemes;
             Position = 0;
         }
-
+        /// <summary>
+        /// Производит расчёт по заданному массиву лексем
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="CalcLexemesException"></exception>
         public double Calc()
         {
             Position = 0;
-            int result = Expr();
+            double result = Expr();
             return result;
             
         }
@@ -46,7 +50,7 @@ namespace AriphmeticParse
         }
 
         //входной метод обработки 
-        private int Expr()
+        private double Expr()
         {
             Lexem lexem = NextLexem();
             if (lexem.LexemType == LexemType.EndStr)
@@ -61,9 +65,9 @@ namespace AriphmeticParse
 
         }
 
-        private int PlusMin()
+        private double PlusMin()
         {
-            int value = MultDiv();
+            double value = MultDiv();
             while (true)
             {
                 Lexem lexem = NextLexem();
@@ -86,9 +90,9 @@ namespace AriphmeticParse
             }
         }
 
-        private int MultDiv()
+        private double MultDiv()
         {
-            int value = Factor();
+            double value = Factor();
             while (true)
             {
                 Lexem lexem = NextLexem();
@@ -112,15 +116,15 @@ namespace AriphmeticParse
             }
         }
 
-        private int Factor()
+        private double Factor()
         {
             Lexem lexem = NextLexem();
             switch(lexem.LexemType)
             {
                 case LexemType.Number:
-                    return int.Parse(lexem.Value);
+                    return double.Parse(lexem.Value);
                 case LexemType.OpenParenthesis:
-                    int value = PlusMin(); 
+                    double value = PlusMin(); 
                     lexem = NextLexem();
                     if (lexem.LexemType != LexemType.CloseParenthesis)
                         throw new CalcLexemesException($"Непредвиденный символ: {lexem.Value} в позиции {this.Position}");

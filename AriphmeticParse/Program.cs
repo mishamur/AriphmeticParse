@@ -17,7 +17,7 @@ public static class Program
         List<Lexem> ariphmeticExpression = null;
         try
         {
-            ariphmeticExpression = AriphmeticParser.Parse("5 / 2");
+            ariphmeticExpression = AriphmeticParser.Parse("5 / 2 * (1 + 2)");
         }
         catch(ArgumentException ex)
         {

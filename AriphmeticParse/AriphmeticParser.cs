@@ -7,14 +7,27 @@ using AriphmeticParse.Utils;
 
 namespace AriphmeticParse
 {
+    /// <summary>
+    /// Парсер простых арифметических выражений
+    /// </summary>
     public class AriphmeticParser
     {
+        /// <summary>
+        /// на вход подаётся  корректное арифметическое выражение.
+        /// поддерживаемы операции: + - / *
+        /// операнды только целочисленные
+        /// </summary>
+        /// <param name="input">
+        /// Арифметическое выражение в строковом представлении
+        /// </param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static List<Lexem> Parse(string input)
         {
             if (!string.IsNullOrEmpty(input))
             {
                 List<Lexem> result = new List<Lexem>();
-                //проход по стрке и выделения лексем
+                //проход по строке и выделения лексем
                 int i = 0;
                 while(i < input.Length)
                 {
